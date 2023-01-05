@@ -1,24 +1,35 @@
-# README
+# mitene!
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# サイト概要
+店舗内のコミュニケーションを容易にするコミュニティサイトです。
+## サイトテーマ
+前職で接客販売業に従事しておりましたが、従業員同士の情報共有が大変でした。
+店舗の各マニュアル、売場の変更、商品、顧客対応情報など、情報の種類が多いこと。管理者、社員、担当者、アルバイトの間で、公開する情報と優先度が変わることなど、情報の選別が難しいこと。
+なにより、出勤日の異なる人達にどれだけ情報が共有されているかの把握が難しく、情報共有の不十分によって対応にムラが生じてしまうことがありました。
 
-Things you may want to cover:
+情報が見るべき人に確実にわたり、伝達内容の詳細が確認しやすいツールがあると良いと思い、サービスの制作に至りました。
 
-* Ruby version
+## ターゲットユーザ
+販売業従事者
 
-* System dependencies
+## 主な利用シーン
+- 店舗内に情報を公開する時。
+- 公開された情報を確認する時。
 
-* Configuration
+## 使い方
+新しく情報を公開したい人は、新規登録から内容/公開する役職の範囲/カテゴリーを記入して投稿を行います。
+公開される情報は、役職によって制限されて表示されます。
+情報を確認した人は確認ボタンにチェックすることで、確認済みの情報として処理されます。
+確認済みの情報には、確認済みの人が表示されます。
+カテゴリーやキーワードによって情報の検索ができます。
+ブックマークをすることで、重要な情報として表示することができます。
+公開された情報について、どの役職でもコメントを行い意見共有を行うことができます。
+## 設計書
 
-* Database creation
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
