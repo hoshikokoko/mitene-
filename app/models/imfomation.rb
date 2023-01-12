@@ -1,0 +1,2 @@
+class Imfomation < ApplicationRecord
+end
