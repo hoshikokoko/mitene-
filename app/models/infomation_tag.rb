@@ -1,0 +1,2 @@
+class InfomationTag < ApplicationRecord
+end
