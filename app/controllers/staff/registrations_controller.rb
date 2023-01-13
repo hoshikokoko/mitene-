@@ -59,4 +59,17 @@ class Staff::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+  
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  
+  # サインアップ後に社員詳細画面へ遷移
+  def after_sign_up_path_for(resource) 
+    admin_staffs_path
+  end
+  
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:employee_number, :first_name, :last_name, :position, :email])
+  end
 end

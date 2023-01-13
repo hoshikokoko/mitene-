@@ -8,7 +8,7 @@
 Admin.create!(
     email: 'testadmin@mail.com',
     password: 'testadmin',
-    admin_number: '0000',
+    employee_number: '0000',
     first_name: 'テスト',
     last_name: '管理者',
     is_deleted: 'false',

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :admin do
     get 'homes/top' => 'homes#top', as: 'top'
+    resources :staffs, only: [:index, :show, :edit, :update]
   end
   namespace :staff do
     get 'homes/top' => 'homes#top', as: 'top'

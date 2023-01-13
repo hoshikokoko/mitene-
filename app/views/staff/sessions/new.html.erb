@@ -1,12 +1,12 @@
 <div class="container">
   <div class="row justify-content-md-center mt-5">
-    <h2>社員用ログイン</h2>
+    <h2>従業員用ログイン</h2>
   </div>
   <div class="row justify-content-md-center">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <%= f.label :社員番号 %><br />
+        <%= f.text_field :employee_number, autofocus: true, autocomplete: "employee_number" %>
       </div>
     
       <div class="field">
@@ -18,6 +18,5 @@
         <%= f.submit "ログイン", class: "btn btn-success" %>
       </div>
     <% end %>
-    
   </div>
 </div>
