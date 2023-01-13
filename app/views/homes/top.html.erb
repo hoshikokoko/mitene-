@@ -3,8 +3,12 @@
     <%= image_tag 'mitene-logo.png'%>
   </div>
   <div class="row justify-content-md-center">
-   <p class="ml-3"><a class="btn btn-info" href="/staff/sign_in">従業員はこちら</a></p>
-   <p class="ml-3"><a class="btn btn-success" href="/admin/sign_in">管理者はこちら</a></p>
+    <%= link_to new_staff_session_path, class: 'btn btn-info' do %>
+      従業員はこちら
+    <% end %>
+    <%= link_to new_admin_session_path, class: 'btn btn-success ml-3' do %>
+      管理者はこちら
+    <% end %>
   </div>
 
 </div>

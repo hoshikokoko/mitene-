@@ -24,4 +24,14 @@ class Staff::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+  
+  # ログイン後に管理者トップページへ遷移
+  def after_sign_in_path_for(resource)
+    staff_top_path
+  end
+  
+  # ログアウト後に共通トップページへ遷移
+  def after_sign_out_path_for(resource)
+    root_path
+  end
 end

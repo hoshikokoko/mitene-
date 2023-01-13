@@ -1,33 +1,28 @@
 <header>
   <div class="container">
-    <div class="row">
+    <div class="row mb-5">
       <div class="col float-right">
           <% if staff_signed_in? %>
-            <div class="col float-center d-flex align-items-center text-white ">
-              <div>ようこそ、<%= current_staff.first_name %> さん！</div>
-            </div>
             <div class="header_link">
-              <div class="d-grid gap-2 d-md-block">
-                <div class="float-right">
-                  <%= link_to destroy_staff_session_path, method: :delete,class: 'btn btn-info' do %>
-                    ログアウト
-                  <% end %>
-                </div>
-              <% elsif admin_signed_in? %>
-                <div class="float-right">
-                  <%= link_to new_staff_registration_path, class: 'btn btn-success' do %>
-                    社員登録
-                  <% end %>
-                  <%= link_to destroy_admin_session_path, method: :delete,class: 'btn btn-success' do %>
-                    ログアウト
-                  <% end %>
-                </div>
-              <% else %>
-                <div class="float-right">
-                </div>
+               <div class="float-right">
+                <%= link_to destroy_staff_session_path, method: :delete,class: 'btn btn-info' do %>
+                  ログアウト
+                <% end %>
               </div>
-            </div>
-          <% end %>
+            <% elsif admin_signed_in? %>
+              <div class="float-right">
+                <%= link_to new_staff_registration_path, class: 'btn btn-success' do %>
+                  社員登録
+                <% end %>
+                <%= link_to destroy_admin_session_path, method: :delete,class: 'btn btn-success' do %>
+                  ログアウト
+                <% end %>
+              </div>
+            <% else %>
+              <div class="float-right">
+              </div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
