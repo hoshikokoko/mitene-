@@ -11,6 +11,11 @@
   </head>
 
   <body>
-    <%= yield %>
+  <% unless current_page?(root_path) %>
+    <%= render 'layouts/header' %>
+  <% end %>
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>

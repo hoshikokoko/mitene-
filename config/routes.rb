@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     get 'homes/top' => 'homes#top', as: 'top'
   end
   namespace :staff do
-    get 'homes/top'
+    get 'homes/top' => 'homes#top', as: 'top'
   end
   devise_for :staff,skip: [:passwords], controllers: {
     registrations: "staff/registrations",
@@ -14,6 +14,6 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
   
-  root :to => "staff/homes#top"
+  root :to => "homes#top"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
