@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'homes/top' => 'homes#top', as: 'top'
+  end
   namespace :staff do
     get 'homes/top'
   end
-  devise_for :staffs,skip: [:passwords], controllers: {
+  devise_for :staff,skip: [:passwords], controllers: {
     registrations: "staff/registrations",
     sessions: 'staff/sessions'
   }
