@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     sessions: 'staff/sessions'
   }
   
+  # 従業員側deviseを継承してゲスト機能を作成してます。
   devise_scope :staff do
     # ゲストログイン。ゲストユーザーがなければ新規作成するのでpostとしてます。
     post 'staff/gest_sign_in' => 'staff/sessions#new_gest'
@@ -17,7 +18,7 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
   
-
+  # 管理者サイト
   namespace :admin do
     get 'homes/top' => 'homes#top', as: 'top'
     resources :staffs, only: [:index, :show, :edit, :update]
