@@ -24,6 +24,14 @@
         <%= f.text_field :name, class: "form-control col-md-3", placeholder: "ここにタグを記述してください" %>
       </div>
     </div>
+    <div class="row">
+      <div class="col">
+        <%= f.radio_button :priority, :false %>
+        <%= label :priority, "通常", {value: :false, style: "display: inline-block;"} %>
+        <%= f.radio_button :priority, :true %>
+        <%= label :priority, "優先", {value: :true, style: "display: inline-block;"} %>
+      </div>
+    </div>
     <%= f.submit "投稿" ,class: 'btn btn-success' %>
   <% end %>
 </div>

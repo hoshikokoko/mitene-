@@ -1,2 +1,34 @@
-<h1>Staff::Infomations#show</h1>
-<p>Find me in app/views/staff/infomations/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+    </div>
+    <div class="col-8 infomation">
+      <div class="row">
+        <div class="col-6">
+            <div class="row">
+              <%= @infomation.title  %>
+              <%= @infomation.body %>
+              <%= @infomation.staff.last_name %>
+              <%= @infomation.staff.first_name %>
+            </div>
+            <div class="row">
+              <%= link_to edit_staff_infomation_path, class: 'btn btn-info' do %>
+                編集
+              <% end %>
+              <%= link_to staff_infomation_path, method: :delete, class: 'btn btn-info' do %>
+                削除
+              <% end %>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <%= link_to new_staff_infomation_path, class: 'btn btn-info' do %>
+        新規投稿
+      <% end %>
+      <%= link_to staff_infomations_path, class: 'btn btn-info' do %>
+        投稿一覧
+      <% end %>
+    </div>
+  </div>
+</div>
