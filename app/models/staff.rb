@@ -6,6 +6,7 @@ class Staff < ApplicationRecord
   
   # 従業員は論理削除の扱いなのでdestroyはしないことにします。
   has_many :infomations
+  
          
   # ゲストユーザーがない場合新規作成し探し出します。
   # パスワードはランダム生成されます。

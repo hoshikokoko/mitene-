@@ -7,13 +7,14 @@ class Staff::InfomationsController < ApplicationController
   def create
     
     @infomation = Infomation.new(infomation_params)
-    @Infomation.staff_id = current_staff.id
+    @infomation.staff_id = current_staff.id
     tag_list = params[:infomation][:name].split(nil)  
     if @infomation.save                                         
       @infomation.save_tag(tag_list)                         
-      redirect_back(fallback_location: root_path)          
+      redirect_to staff_top_path        
     else
-      redirect_back(fallback_location: root_path)          
+      @tag_list = Tag.all
+      render :new        
     end
   end
 
@@ -38,7 +39,7 @@ class Staff::InfomationsController < ApplicationController
   
   
   private
-    def post_params
+    def infomation_params
       params.require(:infomation).permit(:title, :body, :priority)
     end
 end
