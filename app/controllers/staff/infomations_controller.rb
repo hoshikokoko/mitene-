@@ -1,11 +1,13 @@
 class Staff::InfomationsController < ApplicationController
   def new
-    @infomation = current_user.infomations.new
+    @tag_list = Tag.all
+    @infomation = Infomation.new
   end
 
   def create
     
-    @infomation = current_user.infomations.new(infomation_params)           
+    @infomation = Infomation.new(infomation_params)
+    @Infomation.staff_id = current_staff.id
     tag_list = params[:infomation][:name].split(nil)  
     if @infomation.save                                         
       @infomation.save_tag(tag_list)                         

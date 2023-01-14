@@ -1,4 +1,10 @@
 <div class="container">
+  <div class="row">
+    <% @tag_list.each do |t| %>
+      <%= t.name %>
+      <%= t.infomation.count %>
+    <% end %>
+  </div>
   <%= form_with model: @infomation, url: staff_infomations_path, method: :post do |f| %>
     <div class="row">
       <div class="col">

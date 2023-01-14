@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_13_103924) do
+ActiveRecord::Schema.define(version: 2023_01_14_025652) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -63,15 +63,6 @@ ActiveRecord::Schema.define(version: 2023_01_13_103924) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "imfomations", force: :cascade do |t|
-    t.integer "staff_id", null: false
-    t.string "title", null: false
-    t.text "body", null: false
-    t.boolean "priority", default: false, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "infomation_comments", force: :cascade do |t|
     t.integer "staff_id", null: false
     t.integer "infomation_id", null: false
@@ -83,6 +74,15 @@ ActiveRecord::Schema.define(version: 2023_01_13_103924) do
   create_table "infomation_tags", force: :cascade do |t|
     t.integer "infomation_id"
     t.integer "tag_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "infomations", force: :cascade do |t|
+    t.integer "staff_id", null: false
+    t.string "title", null: false
+    t.text "body", null: false
+    t.boolean "priority", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
