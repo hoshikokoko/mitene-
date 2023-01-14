@@ -34,4 +34,13 @@ class Staff::SessionsController < Devise::SessionsController
   def after_sign_out_path_for(resource)
     root_path
   end
+  
+  
+  def new_gest
+    
+    gest = Staff.gest
+  
+    sign_in gest
+    redirect_to staff_top_path, notics: "ゲストとしてログインしました"
+  end
 end
