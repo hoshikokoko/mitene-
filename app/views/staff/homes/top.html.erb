@@ -1,5 +1,11 @@
 <div class="container">
-  <div class="row">
+  <%= form_with url: search_path, method: :get do |f| %>
+    <%= f.text_field :content %>
+    <%= f.select :model, options_for_select({ "タイトル" => "infomation_title","投稿内容" => "infomation_body" }) %>
+    <%= f.select :method, options_for_select({ "完全一致" => "perfect", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partial" }) %>
+    <%= f.submit '検索' %>
+  <% end %>
+  <div class="row tag_list">
     <div class="col-2">
       
     </div>

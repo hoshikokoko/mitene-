@@ -1,0 +1,16 @@
+    <div class="col-8 infomation">
+      	<h3>"<%= @content %>"の検索結果</h3>
+      <div class="row">
+        <div class="col-6">
+          <% @records.each do |info| %>
+            <div class="row">
+              <%= link_to info.title, staff_infomation_path(info.id), class: "text-info" %>
+              <%= info.body %>
+              <%= info.staff.last_name %>
+              <%= info.staff.first_name %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      
+    </div>

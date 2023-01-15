@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  get 'searches/search'
   # 従業員サインアップ、サインイン
   devise_for :staff,skip: [:passwords], controllers: {
     registrations: "staff/registrations",
@@ -32,5 +33,8 @@ Rails.application.routes.draw do
   
   # サイトトップページ
   root :to => "homes#top"
+  
+  #検索結果出力ページ
+  get '/search', to: 'searches#search'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

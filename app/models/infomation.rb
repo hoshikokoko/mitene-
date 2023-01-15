@@ -21,4 +21,28 @@ class Infomation < ApplicationRecord
       self.tags << new_infomation_tag
     end
   end
+  
+  def self.search_for(model, content, method)
+    if model == 'infomation_title'
+      if method == 'perfect'
+        Infomation.where(title: content)
+      elsif method == 'forward'
+        Infomation.where('title LIKE ?', content+'%')
+      elsif method == 'backward'
+        Infomation.where('title LIKE ?', '%'+content)
+      else
+        Infomation.where('title LIKE ?', '%'+content+'%')
+      end
+    else
+      if method == 'perfect'
+        Infomation.where(body: content)
+      elsif method == 'forward'
+        Infomation.where('body LIKE ?', content+'%')
+      elsif method == 'backward'
+        Infomation.where('body LIKE ?', '%'+content)
+      else
+        Infomation.where('body LIKE ?', '%'+content+'%')
+      end
+    end
+  end
 end
