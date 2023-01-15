@@ -34,7 +34,10 @@ Rails.application.routes.draw do
   # サイトトップページ
   root :to => "homes#top"
   
-  #検索結果出力ページ
-  get '/search', to: 'searches#search'
+  #キーワード検索結果出力ページ
+  get '/search', to: 'searches#search_keyword'
+  
+  #タグ検索結果出力ページ
+  get '/search/tag', to: 'searches#search_tag', as: 'search_tag'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
