@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   
-  get 'searches/search'
   # 従業員サインアップ、サインイン
   devise_for :staff,skip: [:passwords], controllers: {
     registrations: "staff/registrations",
@@ -28,7 +27,9 @@ Rails.application.routes.draw do
   # 従業員サイト
   namespace :staff do
     get 'homes/top' => 'homes#top', as: 'top'
-    resources :infomations
+    resources :infomations do
+      resource :bookmarks, only: [:create, :destroy]
+    end
   end
   
   # サイトトップページ

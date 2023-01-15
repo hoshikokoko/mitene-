@@ -6,6 +6,8 @@ class Infomation < ApplicationRecord
   has_many :infomation_tags, dependent: :destroy
   has_many :tags, through: :infomation_tags
   
+  has_many :favorites, dependent: :destroy
+  
   
   def save_tag(sent_tags)
     current_tags = self.tags.pluck(:name) unless self.tags.nil?

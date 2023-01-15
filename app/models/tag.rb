@@ -3,8 +3,4 @@ class Tag < ApplicationRecord
   has_many :infomation_tags, dependent: :destroy, foreign_key: 'tag_id'
   has_many :infomations, through: :infomation_tags
   
-      @tags = Tag.all
-    @tags.each do |t|
-      t.infomations.count
-    end
 end
