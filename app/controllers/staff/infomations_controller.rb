@@ -7,7 +7,7 @@ class Staff::InfomationsController < ApplicationController
   def create
     @infomation = Infomation.new(infomation_params)
     @infomation.staff_id = current_staff.id
-    tag_list = params[:infomation][:name].split(nil)  
+    tag_list = params[:infomation][:name].split(/[[:blank:]]/)
     if @infomation.save
       @infomation.save_tag(tag_list)
       redirect_to staff_top_path
@@ -50,6 +50,9 @@ class Staff::InfomationsController < ApplicationController
   end
 
   def destroy
+    @infomation = Infomation.find(params[:id])
+    @infomation.destroy
+    redirect_to staff_infomations_path
   end
   
   

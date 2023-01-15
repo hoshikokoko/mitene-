@@ -12,10 +12,10 @@
               <%= @infomation.staff.first_name %>
             </div>
             <div class="row">
-              <%= link_to edit_staff_infomation_path, class: 'btn btn-info' do %>
+              <%= link_to edit_staff_infomation_path, class: "btn btn-info edit_infomation_#{@infomation.id}" do %>
                 編集
               <% end %>
-              <%= link_to staff_infomation_path, method: :delete, class: 'btn btn-info' do %>
+              <%= link_to staff_infomation_path(@infomation.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger destroy_infomation_#{@infomation.id}" do %>
                 削除
               <% end %>
             </div>
