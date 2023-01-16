@@ -1,0 +1,11 @@
+    <% @bookmarks.each do |b| %>
+      <tr>
+        <td><%= b.infomation.staff.first_name %></td>
+        <td>
+          <%= link_to staff_infomation_path(b.infomation.id) do %>
+            <%= b.infomation.title %>
+          <% end %>
+        </td>
+        <td><%= b.infomation.body %></td>
+      </tr>
+    <% end %>

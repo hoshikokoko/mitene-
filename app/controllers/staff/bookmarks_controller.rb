@@ -19,4 +19,8 @@ class Staff::BookmarksController < ApplicationController
       redirect_to request.referer
     end
   end
+  
+  def index
+    @bookmarks = Bookmark.where(staff_id: current_staff.id)
+  end
 end

@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   # 従業員サイト
   namespace :staff do
     get 'homes/top' => 'homes#top', as: 'top'
+    get 'bookmarks/index' => 'bookmarks#index', as: 'bookmarks_index'
     resources :infomations do
       resource :bookmarks, only: [:create, :destroy]
     end
