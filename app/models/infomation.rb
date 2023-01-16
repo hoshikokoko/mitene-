@@ -6,7 +6,11 @@ class Infomation < ApplicationRecord
   has_many :infomation_tags, dependent: :destroy
   has_many :tags, through: :infomation_tags
   
-  has_many :favorites, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
+  
+  def bookmarked_by?(staff)
+    bookmarks.where(staff_id: staff.id).exists?
+  end
   
   
   def save_tag(sent_tags)

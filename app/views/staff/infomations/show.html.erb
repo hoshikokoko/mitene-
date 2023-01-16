@@ -20,6 +20,11 @@
                   削除
                 <% end %>
               <% end %>
+              <% if @infomation.bookmarked_by?(current_staff) %>
+                <td><%= link_to "ブックマークを外す", staff_infomation_bookmarks_path(@infomation.id), method: :delete %></td>
+              <% else %>
+                <td><%= link_to "ブックマーク", staff_infomation_bookmarks_path(@infomation.id), method: :post %></td>
+              <% end %>
             </div>
         </div>
       </div>
