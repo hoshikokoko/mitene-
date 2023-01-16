@@ -1,5 +1,5 @@
-class BookmarksController < ApplicationController
-  
+class Staff::BookmarksController < ApplicationController
+    
   def create
     @infomation = Infomation.find(params[:infomation_id])
     bookmark = @infomation.bookmarks.new(staff_id: current_staff.id)
@@ -12,7 +12,7 @@ class BookmarksController < ApplicationController
   
   def destroy
     @infomation = Infomation.find(params[:infomation_id])
-    bookmark = current_staff.bookmarks.find_by(infomation_id: infomation.id)
+    bookmark = current_staff.bookmarks.find_by(infomation_id: @infomation.id)
     if bookmark.destroy
       redirect_to request.referer
     else
