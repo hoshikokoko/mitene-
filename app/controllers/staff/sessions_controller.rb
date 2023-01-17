@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Staff::SessionsController < Devise::SessionsController
+  
+  before_action :staff_state, only: [:create]
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
@@ -42,5 +44,15 @@ class Staff::SessionsController < Devise::SessionsController
   
     sign_in gest
     redirect_to staff_top_path, notics: "ゲストとしてログインしました"
+  end
+  
+  protected
+
+  def staff_state
+    @staff = Staff.find_by(employee_number: params[:staff][:employee_number])
+    return if !@staff
+      if @staff.valid_password?(params[:staff][:password]) && @staff.is_deleted
+        redirect_to new_staff_session_path
+      end
   end
 end

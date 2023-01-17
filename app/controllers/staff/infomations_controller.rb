@@ -25,6 +25,7 @@ class Staff::InfomationsController < ApplicationController
   def show
     @infomation = Infomation.find(params[:id])
     @infomation_tags = @infomation.tags
+    @infomation_comment = InfomationComment.new
   end
 
   def edit

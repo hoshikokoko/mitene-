@@ -8,6 +8,8 @@ class Staff < ApplicationRecord
   has_many :infomations
   
   has_many :bookmarks, dependent: :destroy
+  
+  has_many :infomation_comments, dependent: :destroy
          
   # ゲストユーザーがない場合新規作成し探し出します。
   # パスワードはランダム生成されます。

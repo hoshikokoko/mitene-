@@ -1,2 +1,21 @@
-<h1>Admin::Staffs#index</h1>
-<p>Find me in app/views/admin/staffs/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      
+    </div>
+    <div class="col-8 infomation">
+      <div class="row">
+        <div class="col-6">
+          <% @staffs.each do |s| %>
+            <div class="row">
+              <%= link_to "#{s.last_name + s.first_name}", admin_staff_path(s.id), class: "text-info" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      
+    </div>
+    <div class="col-2">
+    </div>
+  </div>
+</div>
