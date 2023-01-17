@@ -65,18 +65,19 @@ class Infomation < ApplicationRecord
   end
   
   def create_notification_comment!(current_staff, comment_id)
-    commented_staffs = Comment.select(:staff_id).where(infomation_id: id).where.not(staff_id: current_staff.id).distinct
+    commented_staffs = InfomationComment.select(:staff_id).where(infomation_id: id).where.not(staff_id: current_staff.id).distinct
     commented_staffs.each do |commented_staff|
       save_notification_comment!(current_staff, comment_id, commented_staff_id['staff_id'])
     end
     save_notification_comment!(current_staff, comment_id, staff_id) if commented_staffs.blank?
   end
   
-  def save_notification_comment!(current_staff, comment_id, visited_id)
+  def save_notification_comment!(current_staff, comment_id, staff_id)
     notification = current_staff.active_notifications.new(
-      post_id: id,
-      comment_id: comment_id,
-      visited_id: visited_id,
+      infomation_id: id,
+      infomation_comment_id: comment_id,
+      visited_id: current_staff.id,
+      visiter_id: staff_id,
       action: 'comment'
     )
     if notification.visitor_id == notification.visited_id

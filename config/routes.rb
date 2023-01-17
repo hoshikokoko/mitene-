@@ -32,10 +32,10 @@ Rails.application.routes.draw do
   namespace :staff do
     get 'homes/top' => 'homes#top', as: 'top'
     get 'bookmarks/index' => 'bookmarks#index', as: 'bookmarks_index'
+    resources :notifications, only: [:index, :update]
     resources :infomations do
       resource :bookmarks, only: [:create, :destroy]
       resource :reads, only: [:create, :destroy]
-      resources :notifications, only: [:index, :update]
       resources :infomation_comments, only: [:create, :destroy]
     end
   end
@@ -48,5 +48,6 @@ Rails.application.routes.draw do
   
   #タグ検索結果出力ページ
   get '/search/tag', to: 'searches#search_tag', as: 'search_tag'
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
