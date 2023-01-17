@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+    </div>
+    <div class="col-8 infomation">
+      <div class="row">
+        <div class="col-6">
+            <div class="row">
+              <%= @infomation.title  %>
+              <%= @infomation.body %>
+              <%= @infomation.staff.last_name %>
+              <%= @infomation.staff.first_name %>
+            </div>
+            <div class="row">
+              <% if @infomation.staff == current_staff %>
+                <%= link_to edit_staff_infomation_path, class: "btn btn-info edit_infomation_#{@infomation.id}" do %>
+                  編集
+                <% end %>
+                <%= link_to staff_infomation_path(@infomation.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger destroy_infomation_#{@infomation.id}" do %>
+                  削除
+                <% end %>
+              <% end %>
+            </div>
+            <div class="row">
+              <% @reads.each do |r| %>
+               <%= "#{r.staff.last_name + r.staff.first_name}" %>
+              <% end %>
+            </div>
+            <div class="row">
+              <% @comments.each do |c| %>
+                <%= c.comment %>
+                <%= link_to "削除", admin_infomation_infomation_comment_path(@infomation.id, c.id), method: :delete, class: "btn btn-danger" %>
+              <% end %>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <%= link_to new_staff_infomation_path, class: 'btn btn-info' do %>
+        新規投稿
+      <% end %>
+      <%= link_to staff_infomations_path, class: 'btn btn-info' do %>
+        投稿一覧
+      <% end %>
+    </div>
+  </div>
+</div>

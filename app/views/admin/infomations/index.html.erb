@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      
+    </div>
+    <div class="col-8 infomation">
+      <div class="row">
+        <div class="col-6">
+          <% @infomations.each do |info| %>
+            <div class="row">
+              <%= link_to info.title, admin_infomation_path(info.id), class: "text-info" %>
+              <%= info.body %>
+              <%= info.staff.last_name %>
+              <%= info.staff.first_name %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      
+    </div>
+    <div class="col-2">
+      <%= link_to new_staff_infomation_path, class: 'btn btn-info' do %>
+        新規投稿
+      <% end %>
+    </div>
+  </div>
+</div>
