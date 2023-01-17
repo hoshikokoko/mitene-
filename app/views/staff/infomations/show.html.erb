@@ -25,11 +25,16 @@
               <% else %>
                 <td><%= link_to "ブックマーク", staff_infomation_bookmarks_path(@infomation.id), method: :post %></td>
               <% end %>
+              
+              <% if @infomation.readed_by?(current_staff) %>
+                <td><%= link_to "既読", staff_infomation_reads_path(@infomation.id), method: :delete %></td>
+              <% else %>
+                <td><%= link_to "未読", staff_infomation_reads_path(@infomation.id), method: :post %></td>
+              <% end %>
             </div>
             <div class="row">
-              <%= form_with(model:[@infomation, @infomation_comment], method: :post) do |f| %>
-                <%= f.text_area :comment, rows:'5', placeholder: "コメントをここに記述してください", class: "w-100" %>
-                <%= f.submit "送信する", class: "btn btn-success" %>
+              <% @reads.each do |r| %>
+               <%= "#{r.staff.last_name + r.staff.first_name}" %>
               <% end %>
             </div>
         </div>

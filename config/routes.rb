@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     get 'bookmarks/index' => 'bookmarks#index', as: 'bookmarks_index'
     resources :infomations do
       resource :bookmarks, only: [:create, :destroy]
+      resource :reads, only: [:create, :destroy]
       resources :infomation_comments, only: [:create, :destroy]
     end
   end

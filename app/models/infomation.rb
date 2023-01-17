@@ -10,8 +10,14 @@ class Infomation < ApplicationRecord
   
   has_many :infomation_comments, dependent: :destroy
   
+  has_many :reads, dependent: :destroy
+  
   def bookmarked_by?(staff)
     bookmarks.where(staff_id: staff.id).exists?
+  end
+  
+  def readed_by?(staff)
+    reads.where(staff_id: staff.id).exists?
   end
   
   
