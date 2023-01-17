@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     resources :infomations do
       resource :bookmarks, only: [:create, :destroy]
       resource :reads, only: [:create, :destroy]
+      resources :notifications, only: [:index, :update]
       resources :infomation_comments, only: [:create, :destroy]
     end
   end

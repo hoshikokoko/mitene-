@@ -33,8 +33,22 @@
               <% end %>
             </div>
             <div class="row">
+              <%= form_with(model:[:staff, @infomation, @infomation_comment], method: :post) do |f| %>
+                <%= f.text_area :comment, rows:'5', placeholder: "コメントをここに記述してください", class: "w-100" %>
+                <%= f.submit "送信する", class: "btn btn-success" %>
+              <% end %>
+            </div>
+            <div class="row">
               <% @reads.each do |r| %>
                <%= "#{r.staff.last_name + r.staff.first_name}" %>
+              <% end %>
+            </div>
+            <div class="row">
+              <% @comments.each do |c| %>
+                <%= c.comment %>
+                <% if c.staff == current_staff %>
+                  <%= link_to "削除", staff_infomation_infomation_comment_path(@infomation.id, c.id), method: :delete, class: "btn btn-danger" %>
+                <% end %>
               <% end %>
             </div>
         </div>

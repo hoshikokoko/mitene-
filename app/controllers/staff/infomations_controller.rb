@@ -25,6 +25,7 @@ class Staff::InfomationsController < ApplicationController
   def show
     @infomation = Infomation.find(params[:id])
     @infomation_tags = @infomation.tags
+    @comments = @infomation.infomation_comments
     @infomation_comment = InfomationComment.new
     @reads = Read.where(infomation_id: @infomation.id)
   end

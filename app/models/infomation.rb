@@ -12,10 +12,14 @@ class Infomation < ApplicationRecord
   
   has_many :reads, dependent: :destroy
   
+  has_many :notifications, dependent: :destroy
+  
+  # すでにブックマークしているか判定します
   def bookmarked_by?(staff)
     bookmarks.where(staff_id: staff.id).exists?
   end
   
+  # すでに既読されているか判定します
   def readed_by?(staff)
     reads.where(staff_id: staff.id).exists?
   end
@@ -58,5 +62,26 @@ class Infomation < ApplicationRecord
         Infomation.where('body LIKE ?', '%'+content+'%')
       end
     end
+  end
+  
+  def create_notification_comment!(current_staff, comment_id)
+    commented_staffs = Comment.select(:staff_id).where(infomation_id: id).where.not(staff_id: current_staff.id).distinct
+    commented_staffs.each do |commented_staff|
+      save_notification_comment!(current_staff, comment_id, commented_staff_id['staff_id'])
+    end
+    save_notification_comment!(current_staff, comment_id, staff_id) if commented_staffs.blank?
+  end
+  
+  def save_notification_comment!(current_staff, comment_id, visited_id)
+    notification = current_staff.active_notifications.new(
+      post_id: id,
+      comment_id: comment_id,
+      visited_id: visited_id,
+      action: 'comment'
+    )
+    if notification.visitor_id == notification.visited_id
+      notification.is_checked = true
+    end
+    notification.save if notification.valid?
   end
 end
