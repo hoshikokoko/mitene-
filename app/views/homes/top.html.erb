@@ -1,0 +1,19 @@
+<div class= "container">
+  <div class="row justify-content-md-center">
+    <%= image_tag 'mitene-logo.png'%>
+  </div>
+  <div class="row justify-content-md-center">
+    <%= link_to new_staff_session_path, class: 'btn btn-info' do %>
+      従業員はこちら
+    <% end %>
+    <%= link_to new_admin_session_path, class: 'btn btn-success ml-3' do %>
+      管理者はこちら
+    <% end %>
+  </div>
+  <div class="row justify-content-md-center">
+    <%= link_to staff_gest_sign_in_path, method: :post, class: 'btn btn-info' do %>
+      ゲストはこちら
+    <% end %>
+  </div>
+
+</div>
