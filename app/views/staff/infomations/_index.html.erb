@@ -1,0 +1,12 @@
+    <div class="col-8 infomation-list">
+      <% infomations.each do |info| %>
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title"> <%= link_to info.title, staff_infomation_path(info.id), class: "text-info" %></h5>
+            <p class="card-text"><%= info.body %></p>
+            <p class="card-poster"><%= info.staff.last_name %><%= info.staff.first_name %></p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      <% end %>
+    </div>
