@@ -21,6 +21,7 @@ class Staff::BookmarksController < ApplicationController
   end
   
   def index
-    @bookmarks = Bookmark.where(staff_id: current_staff.id)
+    @tag_lists = Tag.all
+    @bookmarks = Bookmark.where(staff_id: current_staff.id).page(params[:page])
   end
 end

@@ -19,7 +19,7 @@ class Staff::InfomationsController < ApplicationController
 
   def index
     @tag_lists = Tag.all
-    @infomations = Infomation.all
+    @infomations = Infomation.page(params[:page])
   end
 
   def show
