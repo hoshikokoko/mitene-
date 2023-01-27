@@ -7,10 +7,10 @@ Rails.application.routes.draw do
     sessions: 'staff/sessions'
   }
   
-  # 従業員側deviseを継承してゲスト機能を作成してます。
-  devise_scope :staff do
+  # 管理者側deviseを継承してゲスト機能を作成してます。
+  devise_scope :admin do
     # ゲストログイン。ゲストユーザーがなければ新規作成するのでpostとしてます。
-    post 'staff/gest_sign_in' => 'staff/sessions#new_gest'
+    post 'admin/gest_sign_in' => 'admin/sessions#new_gest'
   end
   
   # 管理者サインイン。管理者はサインアップできない想定なので、

@@ -12,24 +12,26 @@
               <%= @infomation.staff.first_name %>
             </div>
             <div class="row">
-              <% if @infomation.staff == current_staff %>
-                <%= link_to edit_staff_infomation_path, class: "btn btn-info edit_infomation_#{@infomation.id}" do %>
-                  編集
+              <% if staff_signed_in? %>
+                <% if @infomation.staff == current_staff %>
+                  <%= link_to edit_staff_infomation_path, class: "btn btn-info edit_infomation_#{@infomation.id}" do %>
+                    編集
+                  <% end %>
+                  <%= link_to staff_infomation_path(@infomation.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger destroy_infomation_#{@infomation.id}" do %>
+                    削除
+                  <% end %>
                 <% end %>
-                <%= link_to staff_infomation_path(@infomation.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger destroy_infomation_#{@infomation.id}" do %>
-                  削除
+                <% if @infomation.bookmarked_by?(current_staff) %>
+                  <td><%= link_to "ブックマークを外す", staff_infomation_bookmarks_path(@infomation.id), method: :delete %></td>
+                <% else %>
+                  <td><%= link_to "ブックマーク", staff_infomation_bookmarks_path(@infomation.id), method: :post %></td>
                 <% end %>
-              <% end %>
-              <% if @infomation.bookmarked_by?(current_staff) %>
-                <td><%= link_to "ブックマークを外す", staff_infomation_bookmarks_path(@infomation.id), method: :delete %></td>
-              <% else %>
-                <td><%= link_to "ブックマーク", staff_infomation_bookmarks_path(@infomation.id), method: :post %></td>
-              <% end %>
-              
-              <% if @infomation.readed_by?(current_staff) %>
-                <td><%= link_to "既読", staff_infomation_reads_path(@infomation.id), method: :delete %></td>
-              <% else %>
-                <td><%= link_to "未読", staff_infomation_reads_path(@infomation.id), method: :post %></td>
+                
+                <% if @infomation.readed_by?(current_staff) %>
+                  <td><%= link_to "既読", staff_infomation_reads_path(@infomation.id), method: :delete %></td>
+                <% else %>
+                  <td><%= link_to "未読", staff_infomation_reads_path(@infomation.id), method: :post %></td>
+                <% end %>
               <% end %>
             </div>
             <div class="row">

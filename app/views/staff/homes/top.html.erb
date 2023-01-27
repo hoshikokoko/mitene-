@@ -7,14 +7,8 @@
       <%= f.submit '検索' %>
     <% end %>
   </div>
-  <div class="row tag_list">
-    <div class="col-2">
-      <p>タグ一覧</p>
-      <% @tag_list.each do |list|%>
-        <%=link_to list.name, search_tag_path(tag_id: list.id) %>
-          <%="(#{list.infomations.count})" %></br>
-        <% end %>
-    </div>
+  <div class="row">
+    <%= render 'layouts/sidebar_left', tag_list: @tag_list %>
     <div class="col-8 infomation-list">
       <% @infomations.each do |info| %>
         <% if info.readed_by?(current_staff) %>
@@ -24,7 +18,6 @@
               <h5 class="card-title"> <%= link_to info.title, staff_infomation_path(info.id), class: "text-info" %></h5>
               <p class="card-text"><%= info.body %></p>
               <p class="card-poster"><%= info.staff.last_name %><%= info.staff.first_name %></p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
           </div>
         <% end %>

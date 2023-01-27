@@ -1,0 +1,7 @@
+  <div class="col-2">
+    <p>タグ一覧</p>
+    <% tag_list.each do |list|%>
+      <%=link_to list.name, search_tag_path(tag_id: list.id) %>
+        <%="(#{list.infomations.count})" %></br>
+      <% end %>
+  </div>

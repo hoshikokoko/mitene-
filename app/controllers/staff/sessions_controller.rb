@@ -37,15 +37,6 @@ class Staff::SessionsController < Devise::SessionsController
     root_path
   end
   
-  
-  def new_gest
-    
-    gest = Staff.gest
-  
-    sign_in gest
-    redirect_to staff_top_path, notics: "ゲストとしてログインしました"
-  end
-  
   protected
 
   def staff_state
