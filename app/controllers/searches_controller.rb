@@ -4,7 +4,12 @@ class SearchesController < ApplicationController
     @model = params[:model]
     @content = params[:content]
     @method = params[:method]
-    @records = Infomation.search_for(@model, @content, @method).page(params[:page])
+    if @model == "staff"
+      @records = Staff.search_for(@content, @method).page(params[:page])
+    else
+      @records = Infomation.search_for(@model, @content, @method).page(params[:page])
+    end
+
   end
   
   def search_tag

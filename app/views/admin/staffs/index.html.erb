@@ -4,14 +4,7 @@
       
     </div>
     <div class="col-8 infomation">
-      <div class="row">
-        <div class="col-6">
-          <% @staffs.each do |s| %>
-            <div class="row">
-              <%= link_to "#{s.last_name + s.first_name}", admin_staff_path(s.id), class: "text-info" %>
-            </div>
-          <% end %>
-        </div>
+      <%= render 'admin/staffs/index', staffs: @staffs %>
       </div>
       
     </div>
