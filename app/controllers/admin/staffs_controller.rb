@@ -15,8 +15,10 @@ class Admin::StaffsController < ApplicationController
   def update
     @staff = Staff.find(params[:id])
     if @staff.update(staff_params)
+      flash[:notice] = "社員情報を編集しました"
       redirect_to admin_staff_path(@staff.id)
     else
+      flash[:alert] = "社員情報の編集に失敗しました"
       render :edit
     end
   end

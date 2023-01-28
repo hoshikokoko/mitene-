@@ -1,3 +1,11 @@
+<% if @staff.errors.any? %>
+  <%= @staff.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @staff.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 <div class="container">
   <div class="row mt-3">
     <div class="col offset-sm-1 col-sm-6">
