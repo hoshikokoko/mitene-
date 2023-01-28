@@ -1,6 +1,6 @@
 class Staff::HomesController < ApplicationController
   def top
-    @tag_list = Tag.all
+    @tag_lists = Tag.all
     @infomations = Infomation.all
   end
   

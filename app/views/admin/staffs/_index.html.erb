@@ -1,8 +1,38 @@
-      <div class="row">
-        <div class="col-6">
-          <% staffs.each do |s| %>
-            <div class="row">
-              <%= link_to "#{s.last_name + s.first_name}", admin_staff_path(s.id), class: "text-info" %>
-            </div>
+<h4 class="ml-5 mb-4">社員一覧</h4>
+<div class="row">
+  <table class="table table-bordered ">
+    <thead>
+      <tr class="table-secondary ">
+        <th>氏名</th>
+        <th>社員番号</th>
+        <th>メールアドレス</th>
+        <th>在籍状態</th>
+      </tr>
+    </thead>
+    <tbody class="table-md h7">
+      <% staffs.each do |staff| %>
+      <tr>
+        <td class="align-middle">
+          <%= link_to "#{staff.last_name + staff.first_name}", admin_staff_path(staff.id), class: "text-info" %>
+        </td>
+        <td class="align-middle">
+          <%= staff.employee_number %>
+        </td>
+        <td class="align-middle">
+          <%= staff.email %>
+        </td>
+        <td class="align-middle">
+          <% if staff.is_deleted == false %>
+            <strong class="text-success">在籍</strong>
+          <% else %>
+            <strong class="text-black-50">退職</strong>
           <% end %>
-        </div>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="pagination">
+    <%= paginate staffs %>
+  </div>
+</div>

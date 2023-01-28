@@ -1,6 +1,7 @@
 class Admin::StaffsController < ApplicationController
   def index
-    @staffs = Staff.all
+    @staffs = Staff.page(params[:page])
+    @tag_lists = Tag.all
   end
 
   def show

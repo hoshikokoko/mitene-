@@ -1,37 +1,33 @@
 <div class="container">
-  <div class="row">
-    <% @tag_lists.each do |t| %>
-      <%= t.name %>
-      <%= t.infomations.count %>
-    <% end %>
+  <div class="search_form mb-3">
+    <%= render 'searches/form' %>
   </div>
-  <%= form_with model: @infomation, url: staff_infomation_path, method: :patch do |f| %>
-    <div class="row">
-      <div class="col">
-        <%= f.label :title, "タイトル", :class => "col-md-3 col-form-label" %>
-        <%= f.text_field :title, class: "form-control col-md-3", placeholder: "ここにタイトルを記述してください" %>
-      </div>
+  <div class="row">
+    <div class="col-2">
+      <%= render 'layouts/sidebar_left', tag_lists: @tag_lists %>
     </div>
-    <div class="row">
-      <div class="col">
-        <%= f.label :title, "本文", :class => "col-md-3 col-form-label" %>
-        <%= f.text_area :body, class: "form-control col-md-3", placeholder: "ここに本文を記述してください" %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <%= f.label :name, "タグ名", :class => "col-md-3 col-form-label" %>
-        <%= f.text_field :name, value: @tag_list, class: "form-control col-md-3", placeholder: "ここにタグを記述してください" %>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
+    <div class="col-8">
+      <%= form_with model: @infomation, url: staff_infomation_path, method: :patch do |f| %>
+        <%= f.label :title, "タイトル", class: "form-label" %>
+        <%= f.text_field :title, class: "form-control mb-3", size: "3", placeholder: "ここにタイトルを記述してください" %>
+        
+        <%= f.label :title, "本文", class: "form-label" %>
+        <%= f.text_area :body, class: "form-control mb-3", size: "3x7", placeholder: "ここに本文を記述してください" %>
+        
+        <%= f.label :name, "タグ名", class: "form-label" %>
+        <%= f.text_field :name, value: @tag_list, class: "form-control mb-3", size: "3", placeholder: "ここにタグを記述してください" %>
+        
+        <%= f.label :priority, "緊急度", class: "form-label" %></br>
         <%= f.radio_button :priority, :false %>
         <%= label :priority, "通常", {value: :false, style: "display: inline-block;"} %>
         <%= f.radio_button :priority, :true %>
-        <%= label :priority, "優先", {value: :true, style: "display: inline-block;"} %>
-      </div>
+        <%= label :priority, "優先", {value: :true, style: "display: inline-block;"} %></br>
+        
+        <%= f.submit "投稿" ,class: 'btn btn-success mt-3' %>
+      <% end %>
     </div>
-    <%= f.submit "編集" ,class: 'btn btn-success' %>
-  <% end %>
+    <div class="col-2">
+      <%= render 'layouts/sidebar_right' %>
+    </div>
+  </div>
 </div>

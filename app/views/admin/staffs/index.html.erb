@@ -1,12 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col-2">
-      
+      <%= render 'layouts/sidebar_left', tag_lists: @tag_lists %>
     </div>
     <div class="col-8 infomation">
       <%= render 'admin/staffs/index', staffs: @staffs %>
-      </div>
-      
     </div>
     <div class="col-2">
     </div>

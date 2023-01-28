@@ -1,14 +1,11 @@
 <div class="container">
-  <div class="search_form ">
-    <%= form_with url: search_path, method: :get do |f| %>
-      <%= f.text_field :content %>
-      <%= f.select :model, options_for_select({ "タイトル" => "infomation_title","投稿内容" => "infomation_body" }) %>
-      <%= f.select :method, options_for_select({ "完全一致" => "perfect", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partial" }) %>
-      <%= f.submit '検索' %>
-    <% end %>
+  <div class="search_form mb-3">
+    <%= render 'searches/form' %>
   </div>
   <div class="row">
-    <%= render 'layouts/sidebar_left', tag_list: @tag_list %>
+    <div class="col-2">
+      <%= render 'layouts/sidebar_left', tag_lists: @tag_lists %>
+    </div>
     <div class="col-8 infomation-list">
       <% @infomations.each do |info| %>
         <% if info.readed_by?(current_staff) %>
@@ -24,15 +21,7 @@
       <% end %>
     </div>
     <div class="col-2">
-      <%= link_to new_staff_infomation_path, class: 'btn btn-info' do %>
-        新規投稿
-      <% end %>
-      <%= link_to staff_infomations_path, class: 'btn btn-info' do %>
-        投稿一覧
-      <% end %>
-      <%= link_to staff_bookmarks_index_path, class: 'btn btn-info' do %>
-        ブックマーク一覧
-      <% end %>
+      <%= render 'layouts/sidebar_right' %>
     </div>
   </div>
 </div>

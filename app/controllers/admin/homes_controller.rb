@@ -1,5 +1,5 @@
 class Admin::HomesController < ApplicationController
   def top
-    @tag_list = Tag.all
+    @tag_lists = Tag.all
   end
 end
