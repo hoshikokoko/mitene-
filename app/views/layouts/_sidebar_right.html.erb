@@ -1,21 +1,18 @@
 <% if staff_signed_in? %>
-  <%= link_to new_staff_infomation_path, class: 'btn btn-info' do %>
+  <%= link_to new_staff_infomation_path, class: 'btn btn-info mb-2' do %>
     新規投稿
   <% end %>
-  <%= link_to staff_infomations_path, class: 'btn btn-info' do %>
+  <%= link_to staff_infomations_path, class: 'btn btn-info mb-2' do %>
     投稿一覧
   <% end %>
-  <%= link_to staff_bookmarks_index_path, class: 'btn btn-info' do %>
+  <%= link_to staff_bookmarks_index_path, class: 'btn btn-info mb-2' do %>
     ブックマーク一覧
   <% end %>
 <% else admin_signed_in? %>
-  <%= link_to new_staff_registration_path, class: 'btn btn-info' do %>
+  <%= link_to new_staff_registration_path, class: 'btn btn-success mb-2' do %>
     社員登録
   <% end %>
-  <%= link_to staff_infomations_path, class: 'btn btn-info' do %>
+  <%= link_to admin_infomations_path, class: 'btn btn-success mb-2' do %>
     投稿一覧
-  <% end %>
-  <%= link_to staff_bookmarks_index_path, class: 'btn btn-info' do %>
-    ブックマーク一覧
   <% end %>
 <% end %>

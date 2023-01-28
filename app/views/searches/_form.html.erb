@@ -1,3 +1,4 @@
+<div class="search_form mb-3">
 <% if staff_signed_in? %>
   <%= form_with url: search_path, method: :get do |f| %>
     <%= f.text_field :content %>
@@ -15,3 +16,4 @@
 <% else %>
 
 <% end %>
+</div>

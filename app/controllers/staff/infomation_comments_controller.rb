@@ -4,10 +4,12 @@ class Staff::InfomationCommentsController < ApplicationController
     @comment = current_staff.infomation_comments.new(infomation_comment_params)
     @comment.infomation_id = @infomation.id
     if @comment.save
-      @infomation.create_notification_comment!(current_staff, @comment.id)
+      flash[:notice] = "コメントを投稿しました"
+      redirect_to request.referer
+    else
+      flash[:alert] = "コメントを投稿に失敗しました"
+      redirect_to request.referer
     end
-    
-    redirect_to request.referer
   end
 
   def destroy

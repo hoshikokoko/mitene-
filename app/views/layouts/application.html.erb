@@ -15,7 +15,12 @@
     <%= render 'layouts/header' %>
   <% end %>
     <main>
-      <p id="notice"><%= notice %></p>
+      <% if flash[:notice] %>
+        <p class="notice bg-info text-white"><%= notice %></p>
+      <% end %>
+      <% if flash[:alert] %>
+        <p class="notice bg-warning"><%= alert %></p>
+      <% end %>
       <%= yield %>
     </main>
   </body>

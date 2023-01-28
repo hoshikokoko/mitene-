@@ -1,20 +1,11 @@
 <div class="container">
-  <%= form_with url: search_path, method: :get do |f| %>
-    <%= f.text_field :content %>
-    <%= f.select :model, options_for_select({ "タイトル" => "infomation_title","投稿内容" => "infomation_body","スタッフ" => "staff" }) %>
-    <%= f.select :method, options_for_select({ "完全一致" => "perfect", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partial" }) %>
-    <%= f.submit '検索' %>
-  <% end %>
+  <%= render 'searches/form' %>
   <div class="row">
-    <%= render 'layouts/sidebar_left', tag_lists: @tag_lists %>
+    <div class="col-2">
+      <%= render 'layouts/sidebar_left', tag_lists: @tag_lists %>
+    </div>
     <div class="col-8 infomation">
-      <div class="row">
-        <div class="col-6">
-          
-          
-        </div>
-      </div>
-      
+      <%= render 'staff/infomations/index', infomations: @infomations %>
     </div>
     <div class="col-2">
       <%= render 'layouts/sidebar_right' %>

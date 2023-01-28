@@ -1,20 +1,27 @@
 <div class="container">
-  <div class="search_form mb-3">
-    <%= render 'searches/form' %>
-  </div>
+  <%= render 'searches/form' %>
   <div class="row">
     <div class="col-2">
       <%= render 'layouts/sidebar_left', tag_lists: @tag_lists %>
     </div>
     <div class="col-8 infomation-list">
-      <% @infomations.each do |info| %>
-        <% if info.readed_by?(current_staff) %>
+      <% @infomations.each do |infomation| %>
+        <% if infomation.readed_by?(current_staff) %>
         <% else %>
           <div class="card mb-3">
             <div class="card-body">
-              <h5 class="card-title"> <%= link_to info.title, staff_infomation_path(info.id), class: "text-info" %></h5>
-              <p class="card-text"><%= info.body %></p>
-              <p class="card-poster"><%= info.staff.last_name %><%= info.staff.first_name %></p>
+              <h5 class="card-title">
+                <%= link_to infomation.title, staff_infomation_path(infomation.id), class: "text-info" %>
+              </h5>
+              <p class="card-text">
+                <%= infomation.body %>
+              </p>
+              <p class="card-poster">
+                <%= infomation.staff.last_name %><%= infomation.staff.first_name %>
+              </p>
+              <p class="post_date text-right">
+                <%= infomation.created_at.strftime("%Y/%m/%d")%>
+              </p>
             </div>
           </div>
         <% end %>

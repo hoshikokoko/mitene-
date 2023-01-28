@@ -22,6 +22,6 @@ class Staff::BookmarksController < ApplicationController
   
   def index
     @tag_lists = Tag.all
-    @bookmarks = Bookmark.where(staff_id: current_staff.id).page(params[:page])
+    @bookmarks = Bookmark.where(staff_id: current_staff.id).order(id: "DESC").page(params[:page])
   end
 end
