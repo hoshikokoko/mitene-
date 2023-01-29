@@ -1,66 +1,85 @@
 <div class="container">
+  <%= render 'searches/form' %>
   <div class="row">
     <div class="col-2">
+      <%= render 'layouts/sidebar_left', tag_lists: @tag_lists %>
     </div>
-    <div class="col-8 infomation">
+    <div class="col-8">
+      <div class="row mb-3">
+        <h5 class="text-info">
+          <%= @infomation.title  %>
+        </h5>
+      </div>
+      <div class="row mb-3">
+        <p>
+          <%= @infomation.body %>
+        </p>
+      </div>
+      <div class="row mb-3 text-right">
+        <%= @infomation.staff.last_name %><%= @infomation.staff.first_name %>
+      </div>
       <div class="row">
-        <div class="col-6">
-            <div class="row">
-              <%= @infomation.title  %>
-              <%= @infomation.body %>
-              <%= @infomation.staff.last_name %>
-              <%= @infomation.staff.first_name %>
+        <% if staff_signed_in? %>
+          <% if @infomation.bookmarked_by?(current_staff) %>
+            <td><%= link_to "ブックマークを外す", staff_infomation_bookmarks_path(@infomation.id), method: :delete %></td>
+          <% else %>
+            <td><%= link_to "ブックマーク", staff_infomation_bookmarks_path(@infomation.id), method: :post %></td>
+          <% end %>
+          <p>/</p>
+          <% if @infomation.readed_by?(current_staff) %>
+            <td><%= link_to "既読", staff_infomation_reads_path(@infomation.id), method: :delete %></td>
+           <% else %>
+            <td><%= link_to "未読", staff_infomation_reads_path(@infomation.id), method: :post %></td>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="row mb-3">
+        <% if @infomation.staff == current_staff %>
+          <%= link_to edit_staff_infomation_path, class: "btn btn-success mr-2 edit_infomation_#{@infomation.id}" do %>
+            編集
+          <% end %>
+          <%= link_to staff_infomation_path(@infomation.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger destroy_infomation_#{@infomation.id}" do %>
+            削除
+          <% end %>
+        <% end %>
+      </div>
+      <div class="row mb-1">
+        <h6 class="text-secondary reader">
+          見た人
+        </h6>
+      </div>
+      <div class="row mb-3">
+        <% @reads.each do |read| %>
+        <p class="text-secondary mr-3">
+          <%= "#{read.staff.last_name + read.staff.first_name} " %>
+        </p>
+        <% end %>
+      </div>
+      <div class="row mb-3">
+        <%= form_with(model:[:staff, @infomation, @infomation_comment], method: :post) do |f| %>
+          <%= f.text_area :comment, rows:'5', placeholder: "コメントをここに記述してください", class: "w-100" %>
+          <%= f.submit "送信する", class: "btn btn-success" %>
+        <% end %>
+      </div>
+      <div class="row mb-1">
+        <h6 class="text-success comments">
+          コメント
+        </h6>
+      </div>
+      <div class="row">
+        <% @comments.each do |comment| %>
+          <div class="col-8 card mb-3">
+            <div class="card-body">
+              <p class="card-text"><%= comment.comment %> </p>
+              <p class="card-commenter text-right"><%= comment.staff.last_name %><%= comment.staff.first_name %> <%= comment.created_at.strftime("%Y/%m/%d")%></p>
+              <%= link_to "削除", admin_infomation_infomation_comment_path(@infomation.id, comment.id), method: :delete, class: "btn btn-danger ml-2 float-right" %>
             </div>
-            <div class="row">
-              <% if @infomation.staff == current_staff %>
-                <%= link_to edit_staff_infomation_path, class: "btn btn-info edit_infomation_#{@infomation.id}" do %>
-                  編集
-                <% end %>
-                <%= link_to staff_infomation_path(@infomation.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-danger destroy_infomation_#{@infomation.id}" do %>
-                  削除
-                <% end %>
-              <% end %>
-              <% if @infomation.bookmarked_by?(current_staff) %>
-                <td><%= link_to "ブックマークを外す", staff_infomation_bookmarks_path(@infomation.id), method: :delete %></td>
-              <% else %>
-                <td><%= link_to "ブックマーク", staff_infomation_bookmarks_path(@infomation.id), method: :post %></td>
-              <% end %>
-              
-              <% if @infomation.readed_by?(current_staff) %>
-                <td><%= link_to "既読", staff_infomation_reads_path(@infomation.id), method: :delete %></td>
-              <% else %>
-                <td><%= link_to "未読", staff_infomation_reads_path(@infomation.id), method: :post %></td>
-              <% end %>
-            </div>
-            <div class="row">
-              <%= form_with(model:[:staff, @infomation, @infomation_comment], method: :post) do |f| %>
-                <%= f.text_area :comment, rows:'5', placeholder: "コメントをここに記述してください", class: "w-100" %>
-                <%= f.submit "送信する", class: "btn btn-success" %>
-              <% end %>
-            </div>
-            <div class="row">
-              <% @reads.each do |r| %>
-               <%= "#{r.staff.last_name + r.staff.first_name}" %>
-              <% end %>
-            </div>
-            <div class="row">
-              <% @comments.each do |c| %>
-                <%= c.comment %>
-                <% if c.staff == current_staff %>
-                  <%= link_to "削除", staff_infomation_infomation_comment_path(@infomation.id, c.id), method: :delete, class: "btn btn-danger" %>
-                <% end %>
-              <% end %>
-            </div>
-        </div>
+          </div>
+        <% end %>
       </div>
     </div>
     <div class="col-2">
-      <%= link_to new_staff_infomation_path, class: 'btn btn-info' do %>
-        新規投稿
-      <% end %>
-      <%= link_to staff_infomations_path, class: 'btn btn-info' do %>
-        投稿一覧
-      <% end %>
+      <%= render 'layouts/sidebar_right' %>
     </div>
   </div>
 </div>

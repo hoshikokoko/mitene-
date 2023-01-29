@@ -14,6 +14,9 @@ class Infomation < ApplicationRecord
   
   has_many :notifications, dependent: :destroy
   
+  validates :title, presence: true
+  validates :body, presence: true
+  
   # すでにブックマークしているか判定します
   def bookmarked_by?(staff)
     bookmarks.where(staff_id: staff.id).exists?

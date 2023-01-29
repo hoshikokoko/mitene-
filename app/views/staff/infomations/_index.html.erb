@@ -1,15 +1,30 @@
-    <div class="col-8 infomation-list">
-      <% infomations.each do |info| %>
-        <div class="card mb-3">
-          <div class="card-body">
-            <h5 class="card-title"> <%= link_to info.title, staff_infomation_path(info.id), class: "text-info" %></h5>
-            <p class="card-text"><%= info.body %></p>
-            <p class="card-poster"><%= info.staff.last_name %><%= info.staff.first_name %></p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
+<% infomations.each do |infomation| %>
+  <div class="card mb-3">
+    <div class="card-body">
+      <% if staff_signed_in? %>
+        <h5 class="card-title">
+          <%= link_to infomation.title, staff_infomation_path(infomation.id), class: "text-info" %>
+        </h5>
+      <% else %>
+        <h5 class="card-title">
+          <%= link_to infomation.title, admin_infomation_path(infomation.id), class: "text-info" %>
+        </h5>
       <% end %>
-      <div class="pagenation">
-        <%= paginate infomations %>
-      </div>
+      <p class="card-text">
+        <%= infomation.body %>
+      </p>
+      <p class="card-poster text-right">
+        <%= infomation.staff.last_name %><%= infomation.staff.first_name %>
+      </p>
+      <p class="post_date text-right">
+        <%= infomation.created_at.strftime("%Y/%m/%d")%>
+      </p>
+      <p class="card-check">
+        <%= "コメント ( #{infomation.infomation_comments.count} ) 見た人( #{infomation.reads.count} )" %>
+      </p>
     </div>
+  </div>
+<% end %>
+<div class="pagination">
+  <%= paginate infomations %>
+</div>

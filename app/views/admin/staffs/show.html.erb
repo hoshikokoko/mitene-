@@ -1,15 +1,15 @@
 <div class="container">
-  <div class="row mt-3">
-    <div class="col offset-sm-1 col-sm-5">
-      <h4><%= @staff.last_name %><%= @staff.first_name %></h4>
-      <table class="table table-borderless">
+  <%= render 'searches/form' %>
+  <div class="row">
+    <div class="col-2">
+      <%= render 'layouts/sidebar_left', tag_lists: @tag_lists %>
+    </div>
+    <div class="col-8">
+      <h4 class="staff_name mb-3"><%= @staff.last_name %><%= @staff.first_name %></h4>
+      <table class="table col-sm-5">
         <tr>
           <td>社員番号</td>
           <td><%= @staff.employee_number %></td>
-        </tr>
-        <tr>
-          <td>氏名</td>
-          <td><%= @staff.last_name %>　<%= @staff.first_name %></td>
         </tr>
         <tr>
           <td>メールアドレス</td>
@@ -27,7 +27,9 @@
         </tr>
       </table>
       <%= link_to "編集する", edit_admin_staff_path, class: "btn btn-success" %>
-      </div>
+    </div>
+    <div class="col-2">
+      <%= render 'layouts/sidebar_right' %>
     </div>
   </div>
 </div>

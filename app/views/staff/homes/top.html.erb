@@ -1,45 +1,60 @@
 <div class="container">
-  <div class="search_form ">
-    <%= form_with url: search_path, method: :get do |f| %>
-      <%= f.text_field :content %>
-      <%= f.select :model, options_for_select({ "タイトル" => "infomation_title","投稿内容" => "infomation_body" }) %>
-      <%= f.select :method, options_for_select({ "完全一致" => "perfect", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partial" }) %>
-      <%= f.submit '検索' %>
-    <% end %>
-  </div>
-  <div class="row tag_list">
+  <%= render 'searches/form' %>
+  <div class="row">
     <div class="col-2">
-      <p>タグ一覧</p>
-      <% @tag_list.each do |list|%>
-        <%=link_to list.name, search_tag_path(tag_id: list.id) %>
-          <%="(#{list.infomations.count})" %></br>
-        <% end %>
+      <%= render 'layouts/sidebar_left', tag_lists: @tag_lists %>
     </div>
     <div class="col-8 infomation-list">
-      <% @infomations.each do |info| %>
-        <% if info.readed_by?(current_staff) %>
+      <h5 class="text-warning">重要なお知らせ</h5>
+      <%  @priority_infomations.each do |infomation| %>
+        <% if infomation.readed_by?(current_staff) %>
+        <% else %>
+          <div class="card mb-3 border border-warning">
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= link_to infomation.title, staff_infomation_path(infomation.id), class: "text-info" %>
+              </h5>
+              <p class="card-text">
+                <%= infomation.body %>
+              </p>
+              <p class="card-poster text-right">
+                <%= infomation.staff.last_name %><%= infomation.staff.first_name %>
+              </p>
+              <p class="post_date text-right">
+                <%= infomation.created_at.strftime("%Y/%m/%d")%>
+              </p>
+              <p class="card-check">
+                <%= "コメント ( #{infomation.infomation_comments.count} ) 見た人( #{infomation.reads.count} )" %>
+              </p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      <h5 class="text-secondary">お知らせ</h5>
+      <% @infomations.each do |infomation| %>
+        <% if infomation.readed_by?(current_staff) %>
         <% else %>
           <div class="card mb-3">
             <div class="card-body">
-              <h5 class="card-title"> <%= link_to info.title, staff_infomation_path(info.id), class: "text-info" %></h5>
-              <p class="card-text"><%= info.body %></p>
-              <p class="card-poster"><%= info.staff.last_name %><%= info.staff.first_name %></p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <h5 class="card-title">
+                <%= link_to infomation.title, staff_infomation_path(infomation.id), class: "text-info" %>
+              </h5>
+              <p class="card-text">
+                <%= infomation.body %>
+              </p>
+              <p class="card-poster text-right">
+                <%= infomation.staff.last_name %><%= infomation.staff.first_name %>
+              </p>
+              <p class="post_date text-right">
+                <%= infomation.created_at.strftime("%Y/%m/%d")%>
+              </p>
             </div>
           </div>
         <% end %>
       <% end %>
     </div>
     <div class="col-2">
-      <%= link_to new_staff_infomation_path, class: 'btn btn-info' do %>
-        新規投稿
-      <% end %>
-      <%= link_to staff_infomations_path, class: 'btn btn-info' do %>
-        投稿一覧
-      <% end %>
-      <%= link_to staff_bookmarks_index_path, class: 'btn btn-info' do %>
-        ブックマーク一覧
-      <% end %>
+      <%= render 'layouts/sidebar_right' %>
     </div>
   </div>
 </div>

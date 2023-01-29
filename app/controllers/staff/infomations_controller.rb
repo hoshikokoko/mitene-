@@ -1,6 +1,6 @@
 class Staff::InfomationsController < ApplicationController
   def new
-    @tag_list = Tag.all
+    @tag_lists = Tag.all
     @infomation = Infomation.new
   end
 
@@ -10,19 +10,23 @@ class Staff::InfomationsController < ApplicationController
     tag_list = params[:infomation][:name].split(/[[:blank:]]/)
     if @infomation.save
       @infomation.save_tag(tag_list)
+      flash[:notice] = "投稿しました"
       redirect_to staff_top_path
     else
-      @tag_list = Tag.all
+      flash[:alert] = "投稿に失敗しました"
+      @tag_lists = Tag.all
       render :new
     end
+    
   end
 
   def index
     @tag_lists = Tag.all
-    @infomations = Infomation.page(params[:page])
+    @infomations = Infomation.order(id: "DESC").page(params[:page])
   end
 
   def show
+    @tag_lists = Tag.all
     @infomation = Infomation.find(params[:id])
     @infomation_tags = @infomation.tags
     @comments = @infomation.infomation_comments
@@ -48,6 +52,7 @@ class Staff::InfomationsController < ApplicationController
 
       redirect_to staff_top_path
     else
+      @tag_lists = Tag.all
       render :edit
     end
   end
@@ -55,6 +60,7 @@ class Staff::InfomationsController < ApplicationController
   def destroy
     @infomation = Infomation.find(params[:id])
     @infomation.destroy
+    flash[:notice] = "削除しました"
     redirect_to staff_infomations_path
   end
   

@@ -1,8 +1,20 @@
+<% if @staff.errors.any? %>
+  <%= @staff.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @staff.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 <div class="container">
+  <%= render 'searches/form' %>
   <div class="row mt-3">
-    <div class="col offset-sm-1 col-sm-6">
+    <div class="col-2">
+      <%= render 'layouts/sidebar_left', tag_lists: @tag_lists %>
+    </div>
+    <div class="col-8">
+      <div class="row mt-3">
       <h4><%=@staff.last_name %><%= @staff.first_name %>さんの社員情報編集</h4>
-      <div class="row mt-4 flex-column align-items-center">
       <%= form_with model: @staff, url: admin_staff_path(@staff.id), method: :patch do |f| %>
         <table>
           <tr>
@@ -26,6 +38,9 @@
         <%= f.submit "変更を保存", class: "btn btn-success" %>
       <% end %>
       </div>
+    </div>
+    <div class="col-2">
+      <%= render 'layouts/sidebar_right' %>
     </div>
   </div>
 </div>
