@@ -48,6 +48,9 @@
               <p class="post_date text-right">
                 <%= infomation.created_at.strftime("%Y/%m/%d")%>
               </p>
+              <p class="card-check">
+                <%= "コメント ( #{infomation.infomation_comments.count} ) 見た人( #{infomation.reads.count} )" %>
+              </p>
             </div>
           </div>
         <% end %>
