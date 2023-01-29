@@ -60,6 +60,7 @@ class Staff::InfomationsController < ApplicationController
   def destroy
     @infomation = Infomation.find(params[:id])
     @infomation.destroy
+    flash[:notice] = "削除しました"
     redirect_to staff_infomations_path
   end
   

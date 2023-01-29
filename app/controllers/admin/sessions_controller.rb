@@ -35,11 +35,11 @@ class Admin::SessionsController < Devise::SessionsController
     root_path
   end
   
-  def new_gest
+  def new_guest
     
-    gest = Admin.gest
+    guest = Admin.guest
   
-    sign_in gest
+    sign_in guest
     redirect_to admin_top_path, notics: "ゲストとしてログインしました"
   end
 end

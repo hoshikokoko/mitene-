@@ -1,26 +1,18 @@
 <div class="container">
-  <%= form_with url: search_path, method: :get do |f| %>
-    <%= f.text_field :content %>
-    <%= f.select :model, options_for_select({ "タイトル" => "infomation_title","投稿内容" => "infomation_body" }) %>
-    <%= f.select :method, options_for_select({ "完全一致" => "perfect", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partial" }) %>
-    <%= f.submit '検索' %>
-  <% end %>
+  <<%= render 'searches/form' %>
   <div class="row tag_list">
     <div class="col-2">
-      
-      <% @tag_lists.each do |list|%>
-        <%=link_to list.name, search_tag_path(tag_id: list.id) %>
-        <%="(#{list.infomations.count})" %>
-      <% end %>
+      <%= render 'layouts/sidebar_left', tag_lists: @tag_lists %>
     </div>
-        <div class="col-8 infomation-list">
-      <% @bookmarks.each do |b| %>
+    <div class="col-8 infomation-list">
+      <% @bookmarks.each do |bookmark| %>
         <div class="card mb-3">
           <div class="card-body">
-            <h5 class="card-title"> <%= link_to b.infomation.title, staff_infomation_path(b.infomation_id), class: "text-info" %></h5>
-            <p class="card-text"><%= b.infomation.body %></p>
-            <p class="card-poster"><%= b.infomation.staff.last_name %><%= b.infomation.staff.first_name %></p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <h5 class="card-title"> <%= link_to bookmark.infomation.title, staff_infomation_path(bookmark.infomation.id), class: "text-info" %></h5>
+            <p class="card-text"><%= bookmark.infomation.body %></p>
+            <p class="card-poster text-right"><%= bookmark.infomation.staff.last_name %><%= bookmark.infomation.staff.first_name %></p>
+            <p class="post_date text-right"><%= bookmark.infomation.created_at.strftime("%Y/%m/%d")%></p>
+            <p class="card-check"><%= "コメント ( #{bookmark.infomation.infomation_comments.count} ) 見た人( #{bookmark.infomation.reads.count} )" %></p>
           </div>
         </div>
       <% end %>

@@ -11,9 +11,7 @@
   </head>
 
   <body>
-  <% unless current_page?(root_path) %>
     <%= render 'layouts/header' %>
-  <% end %>
     <main>
       <% if flash[:notice] %>
         <p class="notice bg-info text-white"><%= notice %></p>

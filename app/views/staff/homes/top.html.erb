@@ -5,6 +5,32 @@
       <%= render 'layouts/sidebar_left', tag_lists: @tag_lists %>
     </div>
     <div class="col-8 infomation-list">
+      <h5 class="text-warning">重要なお知らせ</h5>
+      <%  @priority_infomations.each do |infomation| %>
+        <% if infomation.readed_by?(current_staff) %>
+        <% else %>
+          <div class="card mb-3 border border-warning">
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= link_to infomation.title, staff_infomation_path(infomation.id), class: "text-info" %>
+              </h5>
+              <p class="card-text">
+                <%= infomation.body %>
+              </p>
+              <p class="card-poster text-right">
+                <%= infomation.staff.last_name %><%= infomation.staff.first_name %>
+              </p>
+              <p class="post_date text-right">
+                <%= infomation.created_at.strftime("%Y/%m/%d")%>
+              </p>
+              <p class="card-check">
+                <%= "コメント ( #{infomation.infomation_comments.count} ) 見た人( #{infomation.reads.count} )" %>
+              </p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+      <h5 class="text-secondary">お知らせ</h5>
       <% @infomations.each do |infomation| %>
         <% if infomation.readed_by?(current_staff) %>
         <% else %>
@@ -16,7 +42,7 @@
               <p class="card-text">
                 <%= infomation.body %>
               </p>
-              <p class="card-poster">
+              <p class="card-poster text-right">
                 <%= infomation.staff.last_name %><%= infomation.staff.first_name %>
               </p>
               <p class="post_date text-right">

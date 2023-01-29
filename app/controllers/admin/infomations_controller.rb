@@ -5,6 +5,7 @@ class Admin::InfomationsController < ApplicationController
   end
 
   def show
+    @tag_lists = Tag.all
     @infomation = Infomation.find(params[:id])
     @infomation_tags = @infomation.tags
     @comments = @infomation.infomation_comments

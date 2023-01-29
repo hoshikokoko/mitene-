@@ -1,30 +1,15 @@
 <div class="container">
-  <%= form_with url: search_path, method: :get do |f| %>
-    <%= f.text_field :content %>
-    <%= f.select :model, options_for_select({ "タイトル" => "infomation_title","投稿内容" => "infomation_body" }) %>
-    <%= f.select :method, options_for_select({ "完全一致" => "perfect", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partial" }) %>
-    <%= f.submit '検索' %>
-  <% end %>
-  <div class="row tag_list">
+  <%= render 'searches/form' %>
+  <div class="row">
     <div class="col-2">
-      
-      <% @tag_list.each do |list|%>
-        <%=link_to list.name, search_tag_path(tag_id: list.id) %>
-        <%="(#{list.infomations.count})" %>
-      <% end %>
+      <%= render 'layouts/sidebar_left', tag_lists: @tag_lists %>
     </div>
+    <div class="col-8">
       <h3>タグ"<%= @tag.name %>"の検索結果</h3>
       <%= render 'staff/infomations/index', infomations: @infomations %>
+    </div>
     <div class="col-2">
-      <%= link_to new_staff_infomation_path, class: 'btn btn-info' do %>
-        新規投稿
-      <% end %>
-      <%= link_to staff_infomations_path, class: 'btn btn-info' do %>
-        投稿一覧
-      <% end %>
-      <%= link_to staff_bookmarks_index_path, class: 'btn btn-info' do %>
-        ブックマーク一覧
-      <% end %>
+      <%= render 'layouts/sidebar_right' %>
     </div>
   </div>
 </div>

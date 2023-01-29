@@ -3,7 +3,7 @@ class Staff < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
+    
   # 従業員は論理削除の扱いなのでdestroyはしないことにします。
   has_many :infomations
   
@@ -22,15 +22,13 @@ class Staff < ApplicationRecord
          
   def self.search_for(content, method)
     if method == "perfect_match"
-      @user = Staff.where("first_name || last_name LIKE?", "#{content}")
+      Staff.where("first_name || last_name LIKE?", "#{content}")
     elsif method == "forward_match"
-      @user = Staff.where("first_name || last_name LIKE?","#{content}%")
+      Staff.where('first_name || last_name LIKE ?', content+'%')
     elsif method == "backward_match"
-      @user = Staff.where("first_name || last_name LIKE?","%#{content}")
-    elsif method == "partial_match"
-      @user = Staff.where("first_name || last_name LIKE?","%#{content}%")
+      Staff.where('first_name || last_name LIKE ?', '%'+content)
     else
-      @user = Staff.all
+      Staff.where('first_name || last_name LIKE ?', '%'+content+'%')
     end
   end
   

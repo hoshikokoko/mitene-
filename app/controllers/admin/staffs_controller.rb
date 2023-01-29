@@ -1,4 +1,6 @@
 class Admin::StaffsController < ApplicationController
+  
+  
   def index
     @staffs = Staff.page(params[:page])
     @tag_lists = Tag.all
@@ -6,10 +8,12 @@ class Admin::StaffsController < ApplicationController
 
   def show
     @staff = Staff.find(params[:id])
+    @tag_lists = Tag.all
   end
 
   def edit
     @staff = Staff.find(params[:id])
+    @tag_lists = Tag.all
   end
 
   def update
@@ -19,6 +23,7 @@ class Admin::StaffsController < ApplicationController
       redirect_to admin_staff_path(@staff.id)
     else
       flash[:alert] = "社員情報の編集に失敗しました"
+      @tag_lists = Tag.all
       render :edit
     end
   end
@@ -28,4 +33,5 @@ class Admin::StaffsController < ApplicationController
   def staff_params
     params.require(:staff).permit(:first_name, :last_name, :email, :is_deleted)
   end
+
 end

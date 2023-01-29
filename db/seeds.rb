@@ -8,8 +8,18 @@
 Admin.create!(
     email: 'testadmin@mail.com',
     password: 'testadmin',
-    employee_number: '0000',
+    employee_number: '1',
     first_name: 'テスト',
     last_name: '管理者',
     is_deleted: 'false',
+)
+
+Staff.create!(
+    email: 'teststaff@mail.com',
+    password: 'teststaff',
+    employee_number: '1',
+    first_name: 'テスト',
+    last_name: 'スタッフ',
+    is_deleted: 'false',
+    position: '1',
 )
