@@ -72,7 +72,9 @@
             <div class="card-body">
               <p class="card-text"><%= comment.comment %> </p>
               <p class="card-commenter text-right"><%= comment.staff.last_name %><%= comment.staff.first_name %> <%= comment.created_at.strftime("%Y/%m/%d")%></p>
-              <%= link_to "削除", admin_infomation_infomation_comment_path(@infomation.id, comment.id), method: :delete, class: "btn btn-danger ml-2 float-right" %>
+              <% if comment.staff == current_staff %>
+                <%= link_to "削除", admin_infomation_infomation_comment_path(@infomation.id, comment.id), method: :delete, class: "btn btn-danger ml-2 float-right" %>
+              <% end %>
             </div>
           </div>
         <% end %>
